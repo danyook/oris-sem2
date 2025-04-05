@@ -1,10 +1,9 @@
 package ru.itis.danyook.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -12,6 +11,8 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "account")
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     @Id
@@ -25,36 +26,18 @@ public class UserEntity {
     @Column(name = "phone")
     private String phone;
 
-    public UserEntity() {
-    }
+    @Column(name = "username")
+    private String username;
 
-    public UserEntity(UUID id, String name, String phone) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-    }
+    @Column(name = "password")
+    private String password;
 
-    public UUID getId() {
-        return id;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<RoleEntity> roles;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

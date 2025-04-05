@@ -10,6 +10,8 @@ import ru.itis.danyook.model.UserEntity;
 public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "username", ignore = true)
+    @Mapping(target = "password", ignore = true)
     UserEntity toEntity(UserRequest userRequest);
 
     UserResponse toResponse(UserEntity userEntity);

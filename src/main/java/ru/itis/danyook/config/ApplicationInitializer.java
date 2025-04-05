@@ -10,8 +10,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class ApplicationInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) {
-
-
         AnnotationConfigWebApplicationContext springWebContext = new AnnotationConfigWebApplicationContext();
         springWebContext.register(WebMvcConfig.class);
         springWebContext.register(DataBaseConfig.class);
@@ -20,9 +18,6 @@ public class ApplicationInitializer implements WebApplicationInitializer {
                 servletContext.addServlet("dispatcher", new DispatcherServlet(springWebContext));
         dispatcherServlet.setLoadOnStartup(1);
         dispatcherServlet.addMapping("/");
-
-
     }
-
 }
 

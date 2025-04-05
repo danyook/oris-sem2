@@ -50,4 +50,6 @@ public class BaseUserService implements UserService {
         userRepository.deleteById(uuid);
     }
 
+
+
 }
